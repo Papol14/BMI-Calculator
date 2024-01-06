@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      #calculator {
+        max-width: 300px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="calculator">
+      <h2>BMI Calculator</h2>
+      <label for="weight">Weight (kg):</label>
+      <input
+        type="number"
+        id="weight"
+        step="0.1"
+        placeholder="Enter weight"
+        required
+      />
+
+      <label for="height">Height (cm):</label>
+      <input
+        type="number"
+        id="height"
+        step="0.1"
+        placeholder="Enter height"
+        required
+      />
+
+      <button onclick="calculateBMI()">Calculate BMI</button>
+
+      <h3>Result:</h3>
+      <p id="result"></p>
+    </div>
+
+    <script>
+      function calculateBMI() {
+        // Get user input
+        var weight = document.getElementById("weight").value;
+        var height = document.getElementById("height").value;
+
+        // Check if the input is valid
+        if (weight === "" || height === "") {
+          alert("Please enter both weight and height.");
+          return;
+        }
+
+        // Calculate BMI
+        var bmi = (weight / ((height / 100) * (height / 100))).toFixed(2);
+
+        // Display the result
+        var resultElement = document.getElementById("result");
+        resultElement.textContent = "Your BMI is: " + bmi;
+
+        // Interpret BMI categories
+        if (bmi < 18.5) {
+          resultElement.textContent += " - Underweight";
+        } else if (bmi >= 18.5 && bmi < 24.9) {
+          resultElement.textContent += " - Normal weight";
+        } else if (bmi >= 25 && bmi < 29.9) {
+          resultElement.textContent += " - Overweight";
+        } else {
+          resultElement.textContent += " - Obesity";
+        }
+      }
+    </script>
+  </body>
+</html>
